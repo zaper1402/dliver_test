@@ -1,0 +1,8 @@
+package org.threeMusketeers.Maps.Controller;
+
+import javax.ws.rs.*;
+
+@Component()
+@Path("/maps")
+public class MapsRequestController {
+}
