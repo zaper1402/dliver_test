@@ -1,18 +1,28 @@
 package org.threeMusketeers.dliver_backend.Maps.Pojo;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Table(name = "locations")
+@Data
 public class VendorLocationDbObject {
-    public String id;
-    public String vendorId;
-    public String address;
-    public String city;
-    public String state;
-    public String country;
-    public Integer pincode;
-    public Double latitude;
-    public Double longitude;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+    private Integer vendorId;
+    private String address;
+    private String city;
+    private String state;
+    private String country;
+    private Integer pincode;
+    @Transient
+    private Double latitude;
+    @Transient
+    private Double longitude;
 
     // Constructor
-    public VendorLocationDbObject(String id, String vendorId, String address, String city, String state, String country, Integer pincode, Double latitude, Double longitude) {
+    public VendorLocationDbObject(Integer id, Integer vendorId, String address, String city, String state, String country, Integer pincode, Double latitude, Double longitude) {
         this.id = id;
         this.vendorId = vendorId;
         this.address = address;
