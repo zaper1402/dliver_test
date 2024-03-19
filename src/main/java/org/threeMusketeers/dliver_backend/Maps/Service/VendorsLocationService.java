@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.threeMusketeers.dliver_backend.Maps.Dao.VendorLocationDao;
+import org.threeMusketeers.dliver_backend.Maps.Pojo.CustomerLocationDbObject;
 import org.threeMusketeers.dliver_backend.Maps.Pojo.VendorLocationDbObject;
 
 import java.sql.*;
@@ -16,20 +17,20 @@ public class VendorsLocationService {
     String url = "jdbc:postgresql://localhost:5432/dlivery_backend";
     String postGresUser = "postgres";
     String postGresPassword = "ashirkul";
-    final String TABLE_NAME = "locations";
+    final String TABLE_NAME = "vendor_locations";
 
     @Autowired
     VendorLocationDao vendorLocationDao;
+
+    @Autowired
+    CustomerLocationService customerLocationService;
     public ResponseEntity<?> getAllVendorsByDistance(Integer customerId, Integer distance) {
         try{
             Class.forName("org.postgresql.Driver");
-            Connection conn = DriverManager.getConnection(url, postGresUser, postGresPassword);
-            //todo replace by customer llogic
-            VendorLocationDbObject customerLocationDbObject = getCustomerById(conn,customerId);
+            CustomerLocationDbObject customerLocationDbObject = customerLocationService.getCustomerById(customerId);
 
             if(customerLocationDbObject != null){
-                List<VendorLocationDbObject> locationNames = getAllVendorByDist(conn,customerLocationDbObject, Double.valueOf(distance));
-                conn.close();
+                List<VendorLocationDbObject> locationNames = getAllVendorByDist(customerLocationDbObject, Double.valueOf(distance));
                 return ResponseEntity.ok(locationNames);
             }
             return ResponseEntity.notFound().build();
@@ -37,35 +38,9 @@ public class VendorsLocationService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getLocalizedMessage());
         }
     }
-
-    private VendorLocationDbObject getCustomerById(Connection conn, Integer customerId) throws SQLException {
-        String sql = "SELECT *, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude FROM " + TABLE_NAME + " WHERE id=?";
-        VendorLocationDbObject vendorLocationDbObject = null;
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            // Assuming id is a varchar in your DB, convert customerId to String if not already
-            stmt.setInt(1, customerId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    vendorLocationDbObject = new VendorLocationDbObject(
-                            rs.getInt("id"),
-                            rs.getInt("vendorId"),
-                            rs.getString("address"),
-                            rs.getString("city"),
-                            rs.getString("state"),
-                            rs.getString("country"),
-                            rs.getInt("pincode"),
-                            rs.getDouble("latitude"),
-                            rs.getDouble("longitude")
-                    );
-                    System.out.println(rs.getString("id"));
-                }
-            }
-            return vendorLocationDbObject;
-        }
-    }
-
-    private List<VendorLocationDbObject> getAllVendorByDist(Connection conn, VendorLocationDbObject customerLocationDbObject, Double dist) throws SQLException {
-        String querySQL = "SELECT * FROM locations WHERE ST_DWithin(location, ST_MakePoint(?, ?)::geography, ?)";
+    private List<VendorLocationDbObject> getAllVendorByDist(CustomerLocationDbObject customerLocationDbObject, Double dist) throws SQLException {
+        Connection conn = DriverManager.getConnection(url, postGresUser, postGresPassword);
+        String querySQL = "SELECT * FROM " + TABLE_NAME +" WHERE ST_DWithin(location, ST_MakePoint(?, ?)::geography, ?)";
         List<VendorLocationDbObject> locationNames = new ArrayList<>();
 
         PreparedStatement pstmt = conn.prepareStatement(querySQL);
@@ -89,6 +64,7 @@ public class VendorsLocationService {
         }
         pstmt.close();
         rs.close();
+        conn.close();
         return locationNames;
     }
 }
