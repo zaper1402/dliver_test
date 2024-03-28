@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d96cdde-0bdb-41f5-a08e-5ad51d7e2c6b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Inventory/InventoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/VendorsLocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/VendorsLocationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/CustomerLocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/CustomerLocationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,7 +48,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.DliverBackendApplication.executor": "Debug",
+    "Application.DliverBackendApplication.executor": "Run",
     "Maven.dliver_backend [clean].executor": "Run",
     "Maven.dliver_backend [compile].executor": "Run",
     "Maven.dliver_backend [deploy].executor": "Run",
@@ -106,14 +118,19 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/VendorsLocationService.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Inventory/OdooService.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Maps/Service/VendorsLocationService.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Inventory/OdooService.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/threeMusketeers/dliver_backend/Inventory/OdooService.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

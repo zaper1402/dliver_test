@@ -22,6 +22,7 @@ public class CustomerLocationService {
 
     @Autowired
     CustomerLocationDao customerLocationDao;
+
     public CustomerLocationDbObject getCustomerById(Integer customerId) throws SQLException {
         Connection conn = DriverManager.getConnection(url, postGresUser, postGresPassword);
         String sql = "SELECT *, ST_Y(location::geometry) AS latitude, ST_X(location::geometry) AS longitude FROM " + TABLE_NAME + " WHERE id=?";
